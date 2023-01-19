@@ -7,11 +7,3 @@ const connectDB=()=>{
 }
 
 module.exports=connectDB
-
-let obj={
-
-
-}
-
-obj.name="pankaj"
-console.log(obj)

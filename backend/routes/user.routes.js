@@ -2,7 +2,7 @@ const express = require("express");
 
 const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
-const { off } = require("../models/userModel");
+
 
 const app = express.Router();
 require("dotenv").config;
@@ -49,16 +49,7 @@ app.post("/login", async (req, res) => {
 
 
 
-  // try{
-  //  const user= await userModel.find({email,password})
-  //  if(user.length>0){
-  //   res.send("login success")
-  //  }else{
-  //   res.send("wrong credentials")
-  //  }
-  // }catch(e){
-  //    res.send(e.message)
-  // }
+  
 });
 
 module.exports = app;

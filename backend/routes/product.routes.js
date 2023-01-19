@@ -1,10 +1,21 @@
-const express=require("express")
-const productModel=require("../models/productModel")
+const express = require("express");
+const productModel = require("../models/productModel");
 
+const app = express.Router();
 
+app.get("/", async (req, res) => {
+  let products = await productModel.find();
+  res.send(products);
+});
 
-const app=express.Router()
+app.post("/add", async (req, res) => {
+  const payload = req.body;
+  try {
+    let newProduct = new productModel(payload);
+    res.send(newProduct);
+  } catch (e) {
+    res.send(e.message);
+  }
+});
 
-app.get("/", async(req,res)=>{
-    
-})
+module.exports = app;
