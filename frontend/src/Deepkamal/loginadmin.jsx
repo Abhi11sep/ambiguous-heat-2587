@@ -1,12 +1,12 @@
 import {  Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
-
+import { useNavigate } from 'react-router-dom'
 const Loginadmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-
+    const navigate=useNavigate();
     const handlesubmit = () => {
       const payload = {
         
@@ -15,14 +15,17 @@ const Loginadmin = () => {
         
       };
       console.log(payload);
-      // fetch("https://tame-pear-puppy-boot.cyclic.app/users/register", {
-      //   method: "POST",
-      //   body: JSON.stringify(payload),
-      //   headers: { "Content-type": "application/json" },
-      // })
-      //   .then((response) => response.json())
-      //   .then((response) => console.log(response))
-      //   .catch((err) => console.log(err));
+      fetch("http://localhost:8080/admin/login ", {
+        method: "POST",
+        body: JSON.stringify(payload),
+        headers: { "Content-type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((response) =>{ console.log(response)
+          localStorage.setItem("token",response.token)
+          navigate("/admin")
+        })
+        .catch((err) => console.log(err));
     };
 
     const handleInputChange = (e) => setEmail(e.target.value)

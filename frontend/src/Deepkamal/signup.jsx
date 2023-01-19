@@ -1,46 +1,54 @@
-import {  Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Image, Input, Radio, RadioGroup, Stack, Tabs, Text } from '@chakra-ui/react'
+import {  Box, Button, Container, FormControl, FormErrorMessage, FormHelperText, FormLabel, Image, Input, Radio, RadioGroup, Stack, Tabs, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+
 const Signup = () => {
+  
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const [number, setNumber] = useState('');
+    const [mobile, setMobile] = useState('');
     const [gender, setGender] =useState('');
+    const [role, setRole] =useState ('');
 
-
+ 
+    const navigate=useNavigate();
     const handlesubmit = () => {
+     
         const payload = {
           name,
           email,
           password,
-          number,
-          gender
+          mobile,
+          gender,
+          role
         
         };
         console.log(payload);
-        // fetch("https://tame-pear-puppy-boot.cyclic.app/users/register", {
-        //   method: "POST",
-        //   body: JSON.stringify(payload),
-        //   headers: { "Content-type": "application/json" },
-        // })
-        //   .then((response) => response.json())
-        //   .then((response) => console.log(response))
-        //   .catch((err) => console.log(err));
+        fetch("http://localhost:8080/users/register", {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: { "Content-type": "application/json" },
+        })
+          .then((response) => response.json())
+          .then((response) =>   console.log(response))
+          alert('User successfully Registered')
+          navigate("/login")
+          .catch((err) => console.log(err));
       };
 
     const handleInputChange_email = (e) => setEmail(e.target.value);
     const handleInputChange_password = (e) => setPassword(e.target.value);
-const handlechange_number=(e)=>setNumber(e.target.value);
+const handlechange_number=(e)=>setMobile(e.target.value);
 const handlechange_name=(e)=>setName(e.target.value);
 // const handlechange_gender=(e)=>setGender(e.target.value);
     const isError_Email = email === ''  
     const isError_Name = name === ''
     const isError_password = password=== ""
-    const isError_number = number ===""
+    const isError_number = mobile ===""
 
-    const navigate=useNavigate();
+   
   
     return (
         <>
@@ -64,7 +72,7 @@ const handlechange_name=(e)=>setName(e.target.value);
  {/* mobile number */}
       <FormControl isInvalid={isError_number}>
         <FormLabel> Mobile Number</FormLabel>
-        <Input type='number'  value={number} onChange={handlechange_number} />
+        <Input type='number'  value={mobile} onChange={handlechange_number} />
         {!isError_number ? (
           <FormHelperText>
             
@@ -116,9 +124,17 @@ const handlechange_name=(e)=>setName(e.target.value);
       {/* //gender */}
       <RadioGroup mt={4}  onChange={setGender} value={gender}>
       <Stack direction='row'>
-        <Radio value='Male'>Male</Radio>
-        <Radio value='Female'>Female</Radio>
-        <Radio value='I don’t want to specify'>I don’t want to specify</Radio>
+        <Radio value='male'>Male</Radio>
+        <Radio value='female'>Female</Radio>
+        <Radio value='others'>I don’t want to specify</Radio>
+      </Stack>
+    </RadioGroup>
+
+    <RadioGroup mt={4}  onChange={setRole} value={role}>
+      <Stack direction='row'>
+        <Radio value='buyer'>Buyer</Radio>
+        <Radio value='seller'>Seller</Radio>
+        
       </Stack>
     </RadioGroup>
       
