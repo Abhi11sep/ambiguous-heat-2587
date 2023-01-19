@@ -8,20 +8,22 @@ const Loginuser = () => {
 
     const handlesubmit = () => {
       const payload = {
-        
         email,
         password
-        
       };
       console.log(payload);
-      // fetch("https://tame-pear-puppy-boot.cyclic.app/users/register", {
-      //   method: "POST",
-      //   body: JSON.stringify(payload),
-      //   headers: { "Content-type": "application/json" },
-      // })
-      //   .then((response) => response.json())
-      //   .then((response) => console.log(response))
-      //   .catch((err) => console.log(err));
+
+     fetch("http://localhost:8080/users/login", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((response) => {console.log(response)
+      localStorage.setItem("token",response.token)
+       })
+      .catch((err) => console.log(err));
+
     };
 
     const handleInputChange = (e) => setEmail(e.target.value)
