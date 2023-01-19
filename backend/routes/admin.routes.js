@@ -1,30 +1,25 @@
 const express = require("express");
 
-const userModel = require("../models/userModel");
+const adminModel = require("../models/adminModel");
 const jwt = require("jsonwebtoken");
-
 
 const app = express.Router();
 require("dotenv").config;
 
 app.get("/", async (req, res) => {
-  let users = await userModel.find();
-  res.send(users);
+  let admin = await adminModel.find();
+  res.send(admin);
 });
-
 app.post("/register", async (req, res) => {
-  const { mobile, name, email, gender, password, role } = req.body;
+  const { email, password } = req.body;
   try {
-    let newUser = new userModel({
-      mobile,
-      name,
+    let adminUser = new adminModel({
       email,
-      gender,
+
       password,
-      role,
     });
-    await newUser.save();
-    res.status(200).send(newUser);
+    await adminUser.save();
+    res.status(200).send(adminUser);
   } catch (e) {
     res.status(400).send(e.message);
   }
@@ -33,24 +28,20 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    let existingUser = await userModel.findOne({ email, password });
-  
+    let existingUser = await adminModel.findOne({ email, password });
+
     if (existingUser) {
       let token = jwt.sign(
         { _id: existingUser._id, email: existingUser.email },
         process.env.TOKEN
       );
-      res.status(200).send({token:token});
+      res.status(200).send({ token: token });
     } else {
       res.status(400).send("Invalid Credentials");
     }
   } catch (e) {
     res.status(400).send(e.message);
   }
-
-
-
-  
 });
 
 module.exports = app;
