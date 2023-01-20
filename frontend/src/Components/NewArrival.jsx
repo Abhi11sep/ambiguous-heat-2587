@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container, Image, Select, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Box, Center, Container, Flex, Heading, Image, Select, SimpleGrid, Spacer, Stack, Text } from "@chakra-ui/react";
 import axios from "axios";
 
 const NewArrival = () => {
@@ -76,21 +76,23 @@ const NewArrival = () => {
         }}
       >
         {/* -----------------------------Sorting-Feature------------------------------- */}
-        <Box w="15%" mr="5" bg="white">
-          <Stack direction="horizontal" p="0.5" align="center">
+        <Box w="17%" mr="5" bg="white">
+          <Stack direction="horizontal" p="2" align="center">
             <Text fontSize="12px" fontWeight="450" width="50px">
               Sort By:
             </Text>
 
             <Select
               cursor="pointer"
-              border="none"
-              ml="-3"
+              ml='1'
+              variant='unstyled'
+              mt='-0.5'
               fontSize="13px"
               fontWeight="450"
+              placeholder='Featured'
               onChange={handleSorting}
             >
-              <option value="">Select</option>
+              
               <option value="asc">Price Low to High*</option>
               <option value="des">Price High to Low*</option>
               <option value="dis"> Discount </option>
@@ -101,11 +103,18 @@ const NewArrival = () => {
         </Box>
       </Box>
       {/* ----------------------------------Product Detailings-------------- */}
-      <Box border="5px solid brown">
-        {/* <Box h='1000' w='20' border="5px solid brown">
+      <Flex border="5px solid brown" p='5'>
+        <Stack h='1000' w='20%' ml='5' border="5px solid brown">
+          <Box>
+              <Box>
+                <Heading>Filter By</Heading>
+              </Box>
+          </Box> 
+        </Stack>
 
-        </Box> */}
-        <Box>
+        <Spacer />
+
+        <Stack h='auto'  border="5px solid brown" w='75%'>
         <SimpleGrid columns={[1, 2, 3, 3]} spacing={5}>
               {data &&
                 data.map((item) => {
@@ -124,9 +133,9 @@ const NewArrival = () => {
                   );
                 })}
             </SimpleGrid>
-        </Box>
+        </Stack>
         
-      </Box>
+      </Flex>
     </Container>
   );
 };

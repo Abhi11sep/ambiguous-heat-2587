@@ -7,20 +7,23 @@ import './App.css';
 import Login_user_admin from "./Deepkamal/login_user_admin"
 import Signup from './Deepkamal/signup';
 import Wishlist from "./Components/Payments/Wishlist";
+import Admin from "./Deepkamal/Admin";
 
 function App() {
   return (
     <div className="App">
-      <ChakraProvider>
+      {/* <ChakraProvider>
         <Cart />
         <Wishlist/>
       </ChakraProvider>
+      </ChakraProvider> */}
 
    <Routes>
         <Route exact path="/login" element={ <Login_user_admin/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
-        {/* <Route exact path="/login" element={<Login_user_admin/>}/> */}
+        <Route exact path="/admin" element={<Admin/>}/>
       </Routes>
+     
     </div>
   );
 }

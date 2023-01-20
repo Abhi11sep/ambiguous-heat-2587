@@ -3,15 +3,13 @@ require("dotenv").config()
 
 
 
-const authMiddleware=(req,res,next)=>{
+const adminMiddleware=(req,res,next)=>{
 const  { token }=req.headers
 try{
     if(token){
         const verify=jwt.verify(token,process.env.TOKEN)
-
-        if(verify){
+        if(verify.role==="seller"){
             req.userDetails=verify
-
             next()
         }else{
             res.status(401).send("Unauthorised")
@@ -26,4 +24,4 @@ try{
 
 }
 
-module.exports=authMiddleware
+module.exports=adminMiddleware
