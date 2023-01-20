@@ -22,7 +22,7 @@ const Loginadmin = () => {
       })
         .then((response) => response.json())
         .then((response) =>{ console.log(response)
-          localStorage.setItem("token",response.token)
+          localStorage.setItem("admintoken",response.token)
           navigate("/admin")
         })
         .catch((err) => console.log(err));

@@ -1,15 +1,28 @@
-import { Box, Button, Grid, Image, Input, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Image,
+  Input,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Admin() {
   const [category, setCategory] = useState("");
-  const [url, setUrl] = useState("");
-  const [dprice, setDprice] = useState("");
-  const [price, setPrice] = useState("");
+  const [imageSrc, setimageSrc] = useState("");
+  const [discountedPrice, setdiscountedPrice] = useState("");
+  const [originalPrice, setoriginalPrice] = useState("");
   const [brand, SetBrand] = useState("");
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
+
+
+  const navigate=useNavigate();
 
   useEffect(() => {
     axios
@@ -19,28 +32,41 @@ export default function Admin() {
         console.log(e);
       });
   }, []);
-  console.log(data);
+  // console.log(data);
 
-  function addData() {
-    setCount(data.length + 1);
-    
-    axios
-      .post("http://localhost:8080/products/add", {
-        category,
-        url,
-        price,
-        dprice,
-        brand,
+
+
+  const addData = () => {
+    const payload = {
+      category,
+      imageSrc,
+      discountedPrice,
+      originalPrice,
+      brand,
+    };
+
+    console.log(payload);
+    fetch("http://localhost:8080/products/add", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-type": "application/json",
+        // "Authorization": localStorage.getItem("admintoken")
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+
+        alert("Successfully added");
+        window.location.reload();
       })
-      .then((e) => console.log(e))
-      .catch((e) => console.log(e));
-    alert("Successfuly Complite");
-    window.location.reload();
-    setCategory(""); SetBrand(""); setUrl(""); setPrice(""); setDprice("")
-  }
+
+      .catch((err) => console.log(err));
+  };
 
   function deleteproduct(id) {
-    console.log(id)
+    console.log(id);
     axios
       .delete(`http://localhost:8080/products/delete/${id}`)
       .then((e) => console.log("deleted successfully"))
@@ -48,7 +74,13 @@ export default function Admin() {
     alert("Item Removed");
     window.location.reload();
   }
-  // console.log(data)
+
+  function handleupdate(id) {
+    console.log(id);
+    
+   navigate("/update");
+  }
+
   return (
     <div
       style={{
@@ -56,9 +88,7 @@ export default function Admin() {
         marginLeft: "10%",
       }}
     >
-        
       <Box w={"30%"}>
-     
         <Box>
           <Input
             placeholder="Category"
@@ -74,7 +104,7 @@ export default function Admin() {
             placeholder="Image_url"
             size="lg"
             w="100%"
-            onChange={(e) => setUrl(e.target.value)}
+            onChange={(e) => setimageSrc(e.target.value)}
           />
         </Box>
         <Box>
@@ -82,7 +112,7 @@ export default function Admin() {
             placeholder="Discounted Price"
             size="lg"
             w="100%"
-            onChange={(e) => setDprice(e.target.value)}
+            onChange={(e) => setdiscountedPrice(e.target.value)}
           />
         </Box>
         <Box>
@@ -90,7 +120,7 @@ export default function Admin() {
             placeholder="OriginalPrice"
             size="lg"
             w="100%"
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setoriginalPrice(e.target.value)}
           />
         </Box>
 
@@ -106,6 +136,7 @@ export default function Admin() {
         <Button mt={"20px"} colorScheme="blue" w="100%" onClick={addData}>
           Add Product
         </Button>
+
       </Box>
 
       <Box border={"1px solid black"} ml={"5%"} w={"60%"}>
@@ -160,6 +191,9 @@ export default function Admin() {
                   width={"40%"}
                   mb={"20px"}
                   colorScheme={"green"}
+                  onClick={() => {
+                    handleupdate(dataa._id);
+                  }}
                 >
                   Edit Item
                 </Button>
