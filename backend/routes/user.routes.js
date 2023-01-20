@@ -36,7 +36,7 @@ app.post("/login", async (req, res) => {
     let existingUser = await userModel.findOne({ email, password });
     if (existingUser) {
       let token = jwt.sign(
-        { _id: existingUser._id, email: existingUser.email },
+        { _id: existingUser._id, email: existingUser.email, role:existingUser.role },
         process.env.TOKEN
       );
       res.status(200).send(token);

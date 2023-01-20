@@ -22,6 +22,7 @@ app.get('/', async (req, res) => {
 
 app.post('/', async (req, res) => {
     const { productId } = req.body;
+    console.log(req.body)
     const { _id } = req.userDetails;
     try {
         
@@ -29,7 +30,7 @@ app.post('/', async (req, res) => {
         if(existingProduct){
            return res.status(400).send('product already exists')
         }
-
+       
         let cartItem = new cartModel({ productId, userId: _id });
         await cartItem.save()
         return res.status(200).send(cartItem);
