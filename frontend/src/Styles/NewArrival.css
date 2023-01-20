@@ -1,0 +1,37 @@
+.filterScroll::-webkit-scrollbar {
+  width: 7px;
+}
+
+.filterScroll::-webkit-scrollbar-thumb {
+  background: rgb(204, 203, 203);
+  border-radius: 10px;
+}
+
+.categoryfilterScroll::-webkit-scrollbar {
+  width: 5px;
+}
+.categoryfilterScroll::-webkit-scrollbar-thumb {
+  background: rgb(194, 201, 226);
+  border-radius: 10px;
+}
+
+.productScroll::-webkit-scrollbar {
+  display: none;
+}
+.stickyBox {
+    position: -webkit-sticky; /*for browser compatibility */
+    position: sticky;
+    top: 0;
+    background-image: linear-gradient(
+      to right,
+      rgb(233, 200, 138),
+      rgb(255, 215, 222),
+      #b191ed
+    );
+  }
+
+  .heart:hover   {
+    color: red;
+    display: block;
+  }
+
