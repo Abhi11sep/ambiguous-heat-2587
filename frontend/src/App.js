@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Login_user_admin from "./Deepkamal/login_user_admin"
 import Signup from './Deepkamal/signup';
+import Wishlist from "./Components/Payments/Wishlist";
 import Admin from "./Deepkamal/Admin";
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
     <div className="App">
       {/* <ChakraProvider>
         <Cart />
+        <Wishlist/>
+      </ChakraProvider>
       </ChakraProvider> */}
 
    <Routes>
