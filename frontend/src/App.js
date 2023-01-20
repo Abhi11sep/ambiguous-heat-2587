@@ -15,7 +15,6 @@ function App() {
       {/* <ChakraProvider>
         <Cart />
         <Wishlist/>
-      </ChakraProvider>
       </ChakraProvider> */}
 
    <Routes>
