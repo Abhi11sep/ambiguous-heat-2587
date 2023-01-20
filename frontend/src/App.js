@@ -14,19 +14,17 @@ import Updateproduct from "./Deepkamal/addnewproduct";
 function App() {
   return (
     <div className="App">
-      {/* <ChakraProvider>
+      <ChakraProvider>
         <Cart />
-        <Wishlist/>
-      </ChakraProvider> */}
+        {/* <Wishlist/> */}
+      </ChakraProvider>
 
-   <Routes>
+   {/* <Routes>
         <Route exact path="/login" element={ <Login_user_admin/>}/>
         <Route exact path="/signup" element={<Signup/>}/>
         <Route exact path="/admin" element={<Admin/>}/>
-        <Route exact path="/singleproduct" element={Singleproduct_page}></Route>
-        <Route exact path="/update" element={<Updateproduct/>}></Route>
-      </Routes>
-      
+
+
      
     </div>
   );
