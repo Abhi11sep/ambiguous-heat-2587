@@ -6,6 +6,7 @@ const userRouter=require("./routes/user.routes")
 const cartRouter=require("./routes/cart.routes")
 const productRouter=require("./routes/product.routes")
 const  adminRouter=require("./routes/admin.routes")
+const wishlistRouter=require("./routes/wishlist.routes")
 const app=express()
 app.use(express.json())
 
@@ -14,7 +15,7 @@ app.use("/users",userRouter)
 app.use("/carts", cartRouter)
 app.use("/products", productRouter)
 app.use("/admin", adminRouter)
-
+app.use("/wislists", wishlistRouter)
 
 app.listen(process.env.PORT, async()=>{
      await connectDB()
