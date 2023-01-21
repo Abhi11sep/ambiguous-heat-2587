@@ -60,7 +60,7 @@ const Cart = () => {
         <Box display="flex" gap="10" p="1%">
           <Flex>
             <HiShoppingBag size="25" />
-            <Heading fontSize="20">Shopping Cart ({count})</Heading>
+            <Heading fontSize="20">Shopping Cart ({data.length})</Heading>
           </Flex>
           <Flex m="auto">
             <AiFillHome size="25" />
