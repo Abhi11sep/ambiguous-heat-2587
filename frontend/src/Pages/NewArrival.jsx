@@ -37,11 +37,11 @@ const NewArrival = () => {
 
   useEffect(() => {
     axios(
-      "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products?page=1&limit=10"
+      `https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products?page=${page}&limit=10`
     )
       .then((res) => setData(res.data.data))
       .catch((err) => alert(err));
-  }, []);
+  }, [page]);
   //console.log(data);
 
   const handleSorting = (e) => {
@@ -75,7 +75,6 @@ const NewArrival = () => {
           src="https://cdn.caratlane.com/media/static/images/V4/2022/CL/12-DEC/AppBanner/Newin/05/Desktop_1920-x560_toplisting.jpg"
         />
         <Box
-          border="2px solid brown"
           style={{
             position: "absolute",
             top: "10px",
@@ -224,31 +223,67 @@ const NewArrival = () => {
                     h="20vh"
                     className="categoryfilterScroll"
                   >
-                    <Radio value="1" border="1px solid #4f3267">
+                    <Radio
+                      value="1"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹5,001 - ₹10,000
                     </Radio>
-                    <Radio value="2" border="1px solid #4f3267">
+                    <Radio
+                      value="2"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹15,001 - ₹20,000
                     </Radio>
-                    <Radio value="3" border="1px solid #4f3267">
+                    <Radio
+                      value="3"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹20,001 - ₹30,000
                     </Radio>
-                    <Radio value="4" border="1px solid #4f3267">
+                    <Radio
+                      value="4"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹30,001 - ₹40,000{" "}
                     </Radio>
-                    <Radio value="5" border="1px solid #4f3267">
+                    <Radio
+                      value="5"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹40,001 - ₹50,000
                     </Radio>
-                    <Radio value="6" border="1px solid #4f3267">
+                    <Radio
+                      value="6"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹50,001 - ₹75,000
                     </Radio>
-                    <Radio value="7" border="1px solid #4f3267">
+                    <Radio
+                      value="7"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹75,001 - ₹1,00,000
                     </Radio>
-                    <Radio value="8" border="1px solid #4f3267">
+                    <Radio
+                      value="8"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹1,00,001 - ₹1,50,000
                     </Radio>
-                    <Radio value="9" border="1px solid #4f3267">
+                    <Radio
+                      value="9"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       ₹1,50,001 - ₹2,00,000{" "}
                     </Radio>
                   </Stack>
@@ -273,37 +308,81 @@ const NewArrival = () => {
                     h="20vh"
                     className="categoryfilterScroll"
                   >
-                    <Radio value="1" border="1px solid #4f3267">
+                    <Radio
+                      value="1"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Earrings
                     </Radio>
-                    <Radio value="2" border="1px solid #4f3267">
+                    <Radio
+                      value="2"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Rings
                     </Radio>
-                    <Radio value="3" border="1px solid #4f3267">
+                    <Radio
+                      value="3"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Necklaces
                     </Radio>
-                    <Radio value="4" border="1px solid #4f3267">
+                    <Radio
+                      value="4"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       pendants
                     </Radio>
-                    <Radio value="5" border="1px solid #4f3267">
+                    <Radio
+                      value="5"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Bracelets
                     </Radio>
-                    <Radio value="6" border="1px solid #4f3267">
+                    <Radio
+                      value="6"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Bangles
                     </Radio>
-                    <Radio value="7" border="1px solid #4f3267">
+                    <Radio
+                      value="7"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Chains
                     </Radio>
-                    <Radio value="8" border="1px solid #4f3267">
+                    <Radio
+                      value="8"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Mangalsutra
                     </Radio>
-                    <Radio value="9" border="1px solid #4f3267">
+                    <Radio
+                      value="9"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Nose pin
                     </Radio>
-                    <Radio value="10" border="1px solid #4f3267">
+                    <Radio
+                      value="10"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Charms
                     </Radio>
-                    <Radio value="11" border="1px solid #4f3267">
+                    <Radio
+                      value="11"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Baby Bangles
                     </Radio>
                   </Stack>
@@ -323,16 +402,32 @@ const NewArrival = () => {
                 </Heading>
                 <RadioGroup onChange={setMaterialValue} value={materialvalue}>
                   <Stack direction="column">
-                    <Radio value="1" border="1px solid #4f3267">
+                    <Radio
+                      value="1"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Gold
                     </Radio>
-                    <Radio value="2" border="1px solid #4f3267">
+                    <Radio
+                      value="2"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Diamond
                     </Radio>
-                    <Radio value="3" border="1px solid #4f3267">
+                    <Radio
+                      value="3"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Gemstone
                     </Radio>
-                    <Radio value="4" border="1px solid #4f3267">
+                    <Radio
+                      value="4"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       Solitaire
                     </Radio>
                   </Stack>
@@ -352,16 +447,32 @@ const NewArrival = () => {
                 </Heading>
                 <RadioGroup onChange={setWeightValue} value={weightvalue}>
                   <Stack direction="column">
-                    <Radio value="1" border="1px solid #4f3267">
+                    <Radio
+                      value="1"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       0-2 g
                     </Radio>
-                    <Radio value="2" border="1px solid #4f3267">
+                    <Radio
+                      value="2"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       2-5 g
                     </Radio>
-                    <Radio value="3" border="1px solid #4f3267">
+                    <Radio
+                      value="3"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       5-10 g
                     </Radio>
-                    <Radio value="4" border="1px solid #4f3267">
+                    <Radio
+                      value="4"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       10-20 g
                     </Radio>
                   </Stack>
@@ -386,28 +497,60 @@ const NewArrival = () => {
                     h="20vh"
                     className="categoryfilterScroll"
                   >
-                    <Radio value="1" border="1px solid #4f3267">
+                    <Radio
+                      value="1"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       18 KT Yellow
                     </Radio>
-                    <Radio value="2" border="1px solid #4f3267">
+                    <Radio
+                      value="2"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       18 KT White
                     </Radio>
-                    <Radio value="3" border="1px solid #4f3267">
+                    <Radio
+                      value="3"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       18 KT Rose
                     </Radio>
-                    <Radio value="4" border="1px solid #4f3267">
+                    <Radio
+                      value="4"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       18 KT Two Tone
                     </Radio>
-                    <Radio value="5" border="1px solid #4f3267">
+                    <Radio
+                      value="5"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       14 KT Yellow
                     </Radio>
-                    <Radio value="6" border="1px solid #4f3267">
+                    <Radio
+                      value="6"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       14 KT White
                     </Radio>
-                    <Radio value="7" border="1px solid #4f3267">
+                    <Radio
+                      value="7"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       14 KT Rose
                     </Radio>
-                    <Radio value="8" border="1px solid #4f3267">
+                    <Radio
+                      value="8"
+                      border="1px solid #4f3267"
+                      bgColor="#f6f3f9"
+                    >
                       14 KT Two Tone
                     </Radio>
                   </Stack>
@@ -542,7 +685,7 @@ const NewArrival = () => {
           <Flex justifyContent="center" alignItems="center" mt="5" mb="5">
             <Button
               onClick={() => {
-                if (page == 1) {
+                if (page === 1) {
                   setPage(5);
                 } else {
                   setPage((page) => page - 1);
@@ -556,7 +699,7 @@ const NewArrival = () => {
             </Button>
             <Button
               onClick={() => {
-                if (page == 5) {
+                if (page === 5) {
                   setPage(1);
                 } else {
                   setPage((page) => page + 1);
