@@ -11,6 +11,9 @@ import {
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../Components/Navbar";
+import Updateproduct from "./updatenewproduct";
+import Footer from "../Components/Footer";
 
 export default function Admin() {
   const [category, setCategory] = useState("");
@@ -20,7 +23,8 @@ export default function Admin() {
   const [brand, SetBrand] = useState("");
   const [count, setCount] = useState(0);
   const [data, setData] = useState([]);
-
+  const [dprice, setdDprice] = useState("");
+  const [oprice, setOprice] = useState("");
 
   const navigate=useNavigate();
 
@@ -43,6 +47,8 @@ export default function Admin() {
       discountedPrice,
       originalPrice,
       brand,
+      dprice,
+      oprice
     };
 
     console.log(payload);
@@ -51,7 +57,7 @@ export default function Admin() {
       body: JSON.stringify(payload),
       headers: {
         "Content-type": "application/json",
-        // "Authorization": localStorage.getItem("admintoken")
+        "Authorization": localStorage.getItem("admintoken")
       },
     })
       .then((response) => response.json())
@@ -77,17 +83,24 @@ export default function Admin() {
 
   function handleupdate(id) {
     console.log(id);
-    
+   
+    localStorage.setItem("id",id);
    navigate("/update");
   }
 
   return (
+<>
+<Navbar/>
+
     <div
       style={{
         display: "flex",
-        marginLeft: "10%",
+        margin: "auto",
+        paddingTop:"200px",
+        width:"80%"
       }}
     >
+     
       <Box w={"30%"}>
         <Box>
           <Input
@@ -130,6 +143,22 @@ export default function Admin() {
             size="lg"
             w="100%"
             onChange={(e) => SetBrand(e.target.value)}
+          />
+        </Box>
+        <Box>
+          <Input
+            placeholder="Discount Price"
+            size="lg"
+            w="100%"
+            onChange={(e) => setdDprice(e.target.value)}
+          />
+        </Box>
+        <Box>
+          <Input
+            placeholder="Original Price"
+            size="lg"
+            w="100%"
+            onChange={(e) => setOprice(e.target.value)}
           />
         </Box>
 
@@ -203,5 +232,7 @@ export default function Admin() {
         </Grid>
       </Box>
     </div>
+    <Footer/>
+    </>
   );
 }

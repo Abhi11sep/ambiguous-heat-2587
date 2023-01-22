@@ -22,6 +22,9 @@ import { AiFillHeart } from "react-icons/ai";
 import { ChevronRightIcon, CopyIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import "../Styles/NewArrival.css";
+import Navbar from "../Components/Navbar";
+import Footer from "../Components/Footer";
+import { Link } from "react-router-dom";
 
 const NewArrival = () => {
   const [data, setData] = useState([]);
@@ -37,11 +40,12 @@ const NewArrival = () => {
 
   useEffect(() => {
     axios(
-      "https://dbioz2ek0e.execute-api.ap-south-1.amazonaws.com/mockapi/get-products?page=1&limit=10"
+      
+      `http://localhost:8080/products?page=${page}&limit=10`
     )
-      .then((res) => setData(res.data.data))
+      .then((res) => setData(res.data))
       .catch((err) => alert(err));
-  }, []);
+  }, [page]);
   //console.log(data);
 
   const handleSorting = (e) => {
@@ -49,12 +53,12 @@ const NewArrival = () => {
     setChange(!change);
     if (value === "asc") {
       let asc = data.sort((a, b) => {
-        return a.price - b.price;
+        return a.dPrice - b.dPrice;
       });
       setSortData(asc);
     } else if (value === "des") {
       let des = data.sort((a, b) => {
-        return b.price - a.price;
+        return b.dPrice - a.dPrice;
       });
       setSortData(des);
     }
@@ -66,7 +70,10 @@ const NewArrival = () => {
 
   return (
     // =======================================Navbar===================================
-    <Container h="auto" p="-5" maxW="">
+    <>
+    <Navbar/>
+  
+    <Container h="auto" p="-5" maxW="" pt={"130px"}>
       {/* -----------------------------------Poster-Box------------------- */}
       <Box w="100%">
         <Image
@@ -436,7 +443,8 @@ const NewArrival = () => {
             {data &&
               data.map((item) => {
                 return (
-                  // <Link to={}>
+                  <Link to={`/singleproduct/${item._id}`}>
+
                   <Box
                     textAlign="left"
                     lineHeight="0.5"
@@ -454,21 +462,21 @@ const NewArrival = () => {
                           borderRadius="10"
                           boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px"
                           boxSize="20rem"
-                          src={item.image}
+                          src={item.imageSrc}
                         />
                       </Box>
 
                       <Flex>
-                        <Text mr="3"> ₹ {item.price} </Text>
+                        <Text mr="3"> {item.discountedPrice} </Text>
 
                         <Text
                           textDecoration="line-through"
                           color="black"
-                          fontWeight="100"
+                          fontWeight="400"
                           mt="1"
                           fontSize="12"
                         >
-                          ₹ {item.MRP}
+                           {item.originalPrice}
                         </Text>
                         <Spacer />
                         <CopyIcon color="#8863fb;" />
@@ -488,7 +496,7 @@ const NewArrival = () => {
                       <Flex>
                         <Text color="#9d9fa4" fontWeight="400">
                           {" "}
-                          {item.title}{" "}
+                          {item.brand}{" "}
                         </Text>
                         <Spacer />
                         <Button
@@ -535,7 +543,7 @@ const NewArrival = () => {
                       </Flex>
                     </Stack>
                   </Box>
-                  // </Link>
+                   </Link>
                 );
               })}
           </SimpleGrid>
@@ -569,7 +577,9 @@ const NewArrival = () => {
         </Stack>
       </Flex>
     </Container>
-    // ==============================================Footer==================================
+   
+    <Footer/>
+    </>
   );
 };
 

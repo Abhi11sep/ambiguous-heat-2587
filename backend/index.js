@@ -10,12 +10,16 @@ const wishlistRouter=require("./routes/wishlist.routes")
 const app=express()
 app.use(express.json())
 
-app.use(cors())
+app.use(cors(
+    {origin:"*"}
+)
+
+)
 app.use("/users",userRouter)
 app.use("/carts", cartRouter)
 app.use("/products", productRouter)
 app.use("/admin", adminRouter)
-app.use("/wislists", wishlistRouter)
+app.use("/wishlist", wishlistRouter)
 
 app.listen(process.env.PORT, async()=>{
      await connectDB()

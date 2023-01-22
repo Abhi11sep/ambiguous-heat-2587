@@ -7,6 +7,8 @@ const productSchema = new Schema(
     discountedPrice: String,
     originalPrice: String,
     brand: String,
+    dprice:Number,
+    oprice:Number,
   },
   {
     versionKey: false,

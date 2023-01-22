@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiArrowBack, BiLockAlt } from "react-icons/bi";
 import { AiFillHome } from "react-icons/ai";
@@ -17,31 +17,102 @@ import { HiShoppingBag } from "react-icons/hi";
 import { BsBagPlusFill, BsTruck } from "react-icons/bs";
 import CartFooter from "./CartFooter";
 import CartNavbar from "./CartNavbar";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-const arr = [
-  {
-    img: "https://cdn1.caratlane.com/media/catalog/product/cache/6/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07311-1YP6P0_1_lar.jpg",
-  },
-  {
-    img: "https://cdn1.caratlane.com/media/catalog/product/cache/6/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07311-1YP6P0_1_lar.jpg",
-  },
-  {
-    img: "https://cdn1.caratlane.com/media/catalog/product/cache/6/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07311-1YP6P0_1_lar.jpg",
-  },
-  {
-    img: "https://cdn1.caratlane.com/media/catalog/product/cache/6/small_image/200x200/9df78eab33525d08d6e5fb8d27136e95/J/R/JR07311-1YP6P0_1_lar.jpg",
-  },
-];
+
+
+
 
 const Cart = () => {
+  let stotal = 0;
+  let saveprice = 0;
+let total = 0;
   const [count, setCount] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [data, setData] = useState(arr);
+  const [quantity, setQuantity] = useState(1);
+  const [data, setData] = useState([]);
+  const [datawish, setDatawish] = useState("");
   const size = [
     5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
     25,
   ];
   const qty = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/carts", {
+        headers: {
+          "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+
+      .then((response) => {
+        // console.log(response);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // console.log(data);
+
+  const handledelete = (id) => {
+    console.log(id);
+    axios
+      .delete(`http://localhost:8080/carts/delete/${id}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+
+      .then((response) => {
+        console.log(response);
+      });
+  };
+  const navigate = useNavigate();
+  const movepaymentpage = () => {
+    navigate("/payment");
+  };
+
+  const wishlist = (data) => {
+    axios
+      .get(`http://localhost:8080/products/${data}`)
+      .then((e) => {
+        setDatawish(e.data);
+
+        wishlistmove(e.data);
+      })
+      .catch((e) => console.log(e));
+  };
+  const wishlistmove = (movedata) => {
+    console.log("movedata", localStorage.getItem("token"));
+
+    fetch("http://localhost:8080/wishlist/adddata", {
+      method: "POST",
+      body: JSON.stringify(movedata),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        handledelete(response.productId);
+      })
+      .catch((err) => console.log(err));
+  };
+  console.log(datawish);
+  data.forEach(ele => {
+stotal=stotal+ele.productId.oPrice
+total = total + ele.productId.dPrice
+saveprice = saveprice + (stotal - total)
+  })
+    // console.log(quantity);
+    
 
   return (
     <div>
@@ -60,7 +131,7 @@ const Cart = () => {
         <Box display="flex" gap="10" p="1%">
           <Flex>
             <HiShoppingBag size="25" />
-            <Heading fontSize="20">Shopping Cart ({count})</Heading>
+            <Heading fontSize="20">Shopping Cart ({data.length})</Heading>
           </Flex>
           <Flex m="auto">
             <AiFillHome size="25" />
@@ -78,9 +149,11 @@ const Cart = () => {
             </Box>
             <Heading>Empty Bag!</Heading>
             <Text>Let's do some retail therapy!</Text>
+            <Link to="/ring">
             <Button bg="#cd59e9" color="white" colorScheme="purple">
               Start Shopping
             </Button>
+            </Link>
           </Box>
         </Box>
       ) : (
@@ -105,7 +178,7 @@ const Cart = () => {
               </Box>
             </Flex>
             <Text textAlign="left" fontWeight="bold" m="1% 0% 1% 0%">
-              Total ({count} Items) : ₹{total}
+              Total ({data.length} Items) : ₹{(total).toLocaleString()}
             </Text>
 
             {data.length !== 0
@@ -113,11 +186,11 @@ const Cart = () => {
                   return (
                     <Flex border="1px solid black" mb="2%">
                       <Box>
-                        <Image src={ele.img} />
+                        <Image src={ele.productId.imageSrc} />
                       </Box>
                       <Box w="80%">
                         <Box textAlign="left" w="55%">
-                          <Text>Mutyaa Pearl Ring</Text>
+                          <Text>{ele.productId.brand}</Text>
                           <Text>JR07311-1YP6P0</Text>
                           <Flex gap="3">
                             <Text m="auto">Size: </Text>
@@ -130,26 +203,52 @@ const Cart = () => {
                             </Stack>
                             <Text m="auto">Quantity: </Text>
                             <Stack m="auto">
-                              <Select fontSize="sm">
+                              <Select fontSize="sm" onChange={(e)=>setQuantity(e.target.value)}>
                                 {qty.map((ok) => (
-                                  <option value="5">{ok}</option>
+                                  <option value={ok}>{ok}</option>
                                 ))}
                               </Select>
                             </Stack>
                           </Flex>
                         </Box>
                         <Box display="flex" m="auto" w="100%">
-                          <Box textAlign="left" w="70%" m="auto" lineHeight="30px">
+                          <Box
+                            textAlign="left"
+                            w="70%"
+                            m="auto"
+                            lineHeight="30px"
+                          >
                             <Text>Delivery by - 23rd to 24th Jan</Text>
                             <Flex gap="3">
-                              <Text fontWeight="bold">₹{ele.price || 0}</Text>
-                              <strike>₹{ele.strike || 0}</strike>
-                              <Text>Save ₹{ele.save || "3,000"}</Text>
+                              <Text fontWeight="bold">
+                                {ele.productId.discountedPrice}
+                              </Text>
+                              <strike>{ele.productId.originalPrice}</strike>
+                              <Text>
+                                Save ₹
+                                {(
+                                  (ele.productId.oPrice- ele.productId.dPrice)
+                                ).toLocaleString()}
+                              </Text>
                             </Flex>
+                        
                           </Box>
                           <Box>
-                            <Button w="80%" border="1px solid black" m="3% 0% 3% 0%">Remove</Button>
-                            <Button w="80%" border="1px solid black">Move to Wishlist</Button>
+                            <Button
+                              w="80%"
+                              border="1px solid black"
+                              m="3% 0% 3% 0%"
+                              onClick={() => handledelete(ele.productId._id)}
+                            >
+                              Remove
+                            </Button>
+                            <Button
+                              w="80%"
+                              border="1px solid black"
+                              onClick={() => wishlist(ele.productId._id)}
+                            >
+                              Move to Wishlist
+                            </Button>
                           </Box>
                         </Box>
                       </Box>
@@ -160,7 +259,14 @@ const Cart = () => {
           </Box>
 
           <Box w="40%" textAlign="left">
-            <Box w="70%" m="auto" mt="3%" lineHeight="40px" position="sticky" top="70px">
+            <Box
+              w="70%"
+              m="auto"
+              mt="3%"
+              lineHeight="40px"
+              position="sticky"
+              top="70px"
+            >
               <Flex>
                 <Button w="100%">
                   Apply Coupon 1 Available <Spacer />
@@ -186,12 +292,12 @@ const Cart = () => {
                 <Flex>
                   <Text>Subtotal</Text>
                   <Spacer />
-                  <Text>0</Text>
+                  <Text>{(stotal).toLocaleString()}</Text>
                 </Flex>
                 <Flex>
                   <Text>You Saved</Text>
                   <Spacer />
-                  <Text>0</Text>
+                  <Text>{(stotal - total).toLocaleString()}</Text>
                 </Flex>
                 <Flex>
                   <Text>Coupon Discount</Text>
@@ -206,7 +312,7 @@ const Cart = () => {
                 <Flex>
                   <Text>TOTAL COST</Text>
                   <Spacer />
-                  <Text>0</Text>
+                  <Text>{(total).toLocaleString()}</Text>
                 </Flex>
               </Box>
               <Button
@@ -215,6 +321,7 @@ const Cart = () => {
                 bg="#cd59e9"
                 color="white"
                 colorScheme="purple"
+                onClick={movepaymentpage}
               >
                 <BiLockAlt />
                 Checkout Securely

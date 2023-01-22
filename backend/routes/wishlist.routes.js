@@ -20,13 +20,17 @@ app.get('/', async (req, res) => {
 
 })
 
-app.post('/', async (req, res) => {
-    const { productId } = req.body;
-    console.log(req.body)
-    const { _id } = req.userDetails;
+
+
+app.post('/adddata', async (req, res) => {
+    const  productId = req.body._id;
+    // console.log("body",productId);
+    const _id = req.userDetails._id;
+//    console.log("main",_id);
     try {
         
         let existingProduct = await wishlistModel.findOne({ productId, userId:_id });
+        // console.log("id",existingProduct)
         if(existingProduct){
            return res.status(400).send('product already exists')
         }
@@ -40,9 +44,11 @@ app.post('/', async (req, res) => {
     }
 })
 
-app.delete('/', async (req, res) => {
 
-    const { productId } = req.body;
+app.delete('/delete/:id', async (req, res) => {
+
+    const  productId = req.params.id;
+    // console.log("product",req.body)
 
     try {
         await wishlistModel.findOneAndDelete({ productId });
@@ -51,6 +57,7 @@ app.delete('/', async (req, res) => {
         return res.status(400).send(e.message)
     }
 })
+
 
 
 module.exports = app;

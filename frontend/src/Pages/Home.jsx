@@ -7,12 +7,17 @@ import picC from '../Assests/picC.png'
 import picD from '../Assests/picD.png'
 import plane from '../Assests/plane.png'
 import CarouselCard from '../Components/CarouselCard'
+import Footer from '../Components/Footer'
+import Navbar from '../Components/Navbar'
 import SliderCard from '../Components/SliderCard'
 import SliderShow1 from '../Components/SliderShow1'
 import './Home.css'
 
 const Home = () => {
   return (
+    <>
+    <Navbar/>
+   
     <div className='wholehome'>
       <SliderShow1/>
 
@@ -151,6 +156,8 @@ const Home = () => {
       </div>
 
     </div>
+    <Footer/>
+    </>
   )
 }
 

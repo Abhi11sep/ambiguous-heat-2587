@@ -8,10 +8,19 @@ app.get("/", async (req, res) => {
   let products = await productModel.find();
   res.send(products);
 });
-app.use(adminMiddleware)
+
+app.get("/:id", async (req, res) => {
+  let id=req.params.id;
+  id.toString()
+
+  let products = await productModel.findOne({_id:id});
+  res.send(products);
+  // console.log(products);
+});
+// app.use(adminMiddleware)
 app.post("/add", async (req, res) => {
   const payload = req.body;
-  console.log(payload)
+  // console.log(payload)
   try {
     let newProduct = new productModel(payload);
     await newProduct.save()

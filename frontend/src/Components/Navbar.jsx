@@ -1,6 +1,6 @@
 import React from 'react'
 import './NavbarStyle.css'
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import {
   FaFacebookSquare, FaInstagramSquare,
   FaYoutubeSquare,
@@ -85,7 +85,7 @@ const Navbar = () => {
             </li>
             <li style={{ fontSize: '12px' }}><form>
               <input style={{ borderRadius: '5px 0px 0px 5px', width: '150px' }} type="search" placeholder="Search..." />
-              <button style={{ backgroundColor: '#aa5af1', borderRadius: '0px 5px 5px 0px' }} type="submit">search</button>
+              <button style={{ backgroundColor: '#aa5af1', borderRadius: '0px 5px 5px 0px' }} >search</button>
             </form>
             </li>
           </ul>
@@ -95,9 +95,9 @@ const Navbar = () => {
         <div className="social-media">
           <ul className="social-media-desktop">
             <li><a style={{ fontSize: '14px' }} href='/'><LocationOnIcon /></a></li>
-            <li><a href='/'><PersonIcon /></a></li>
-            <li><a href='/'><FavoriteIcon /></a></li>
-            <li><a href='/'><ShoppingBasketOutlinedIcon /></a></li>
+            <li><Link to='/signup'><PersonIcon /></Link></li>
+            <li><Link to='/wishlist'><FavoriteIcon /></Link></li>
+            <li><Link to='/cart'><ShoppingBasketOutlinedIcon /></Link></li>
           </ul>
 
           {/* hamburget menu start  */}
@@ -111,16 +111,16 @@ const Navbar = () => {
 
       <div>
         <ul id="navbar1">
-          <li><a href='/'>NEW ARRIVALS</a></li>
-          <li><a href='/'>RINGS</a></li>
-          <li><a href='/'>EARRINGS</a></li>
-          <li><a href='/'>BRACELETS & BANGLES</a></li>
-          <li><a href='/'>SOLITARIES</a></li>
-          <li><a href='/'>MANGALSUTRA</a></li>
-          <li><a href='/'>READY TO SHIP</a></li>
-          <li><a href='/'>KIDS</a></li>
-          <li><a href='/'>OTHERS JEWELLERY</a></li>
-          <li><a href='/'>GIFTING</a></li>
+          <li><Link to='/ring'>NEW ARRIVALS</Link></li>
+          <li><Link to='/ring'>RINGS</Link></li>
+          <li><Link to='/'>EARRINGS</Link></li>
+          <li><Link to='/'>BRACELETS & BANGLES</Link></li>
+          <li><Link to='/'>SOLITARIES</Link></li>
+          <li><Link to='/'>MANGALSUTRA</Link></li>
+          <li><Link to='/'>READY TO SHIP</Link></li>
+          <li><Link to='/'>KIDS</Link></li>
+          <li><Link to='/'>OTHERS JEWELLERY</Link></li>
+          <li><Link to='/'>GIFTING</Link></li>
         </ul>
       </div>
     </div>

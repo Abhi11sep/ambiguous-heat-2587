@@ -2,6 +2,7 @@ import {  Box, Button, Container, FormControl, FormErrorMessage, FormHelperText,
 import React, { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../Components/Navbar'
 const Loginuser = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -21,6 +22,7 @@ const Loginuser = () => {
       .then((response) => response.json())
       .then((response) => {console.log(response)
       localStorage.setItem("token",response.token)
+      navigate("/")
        })
       .catch((err) => console.log(err));
 
@@ -35,6 +37,7 @@ const Loginuser = () => {
   
     return (
         <>
+         {/* <Navbar/> */}
         <Container mb={4}>
         <Text >Login to CaratLane</Text>
         <hr  style={{width:"80px" ,margin:"auto",  borderColor: '#985098',}}/>

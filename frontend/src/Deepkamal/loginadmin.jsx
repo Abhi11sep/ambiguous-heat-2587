@@ -2,6 +2,7 @@ import {  Button, Container, FormControl, FormErrorMessage, FormHelperText, Form
 import React, { useState } from 'react'
 
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../Components/Navbar'
 const Loginadmin = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -35,6 +36,7 @@ const Loginadmin = () => {
   
     return (
         <>
+         {/* <Navbar/> */}
          <Container mb={4}>
         <Text >Login to CaratLane</Text>
         <hr  style={{width:"80px" ,margin:"auto",  borderColor: '#985098',}}/>

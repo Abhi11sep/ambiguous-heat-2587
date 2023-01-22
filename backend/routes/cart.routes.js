@@ -4,14 +4,14 @@ const cartModel=require("../models/cartModel")
 
 const app = Router();
 
-app.use(authMiddleware)
 
+app.use(authMiddleware)
 app.get('/', async (req, res) => {
 
-    const { _id } = req.userDetails;
+    const  _id  = req.userDetails;
 
     try {
-        cartModel.find({ userId: _id }).populate('productId').then(r => {
+       await cartModel.find({ userId: _id }).populate('productId').then(r => {
             return res.status(200).send(r)
         });
     } catch (e) {
@@ -20,10 +20,12 @@ app.get('/', async (req, res) => {
 
 })
 
-app.post('/', async (req, res) => {
-    const { productId } = req.body;
-    console.log(req.body)
+
+app.post('/add', async (req, res) => {
+    const  productId = req.body;
+   
     const { _id } = req.userDetails;
+    
     try {
         
         let existingProduct = await cartModel.findOne({ productId, userId:_id });
@@ -40,13 +42,16 @@ app.post('/', async (req, res) => {
     }
 })
 
-app.delete('/', async (req, res) => {
+app.delete('/delete/:id', async (req, res) => {
 
-    const { productId } = req.body;
+    const  productId = req.params.id;
+    // console.log(productId)
 
     try {
-        await cartModel.findOneAndDelete({ productId });
+       let cart= await cartModel.findOneAndDelete({productId});
+        // console.log(cart)
         return res.status(200).send('deleted')
+        
     } catch (e) {
         return res.status(400).send(e.message)
     }
