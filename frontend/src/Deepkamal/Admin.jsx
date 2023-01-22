@@ -73,7 +73,7 @@ export default function Admin() {
           duration: 2000,
           isClosable: true,
         })
-        window.location.reload();
+        // window.location.reload();
       })
 
       .catch((err) => console.log(err));
@@ -92,11 +92,10 @@ export default function Admin() {
       duration: 2000,
       isClosable: true,
     })
-    window.location.reload();
+    // window.location.reload();
   }
 
   function handleupdate(id) {
-    console.log(id);
 
     localStorage.setItem("id", id);
     navigate("/update");

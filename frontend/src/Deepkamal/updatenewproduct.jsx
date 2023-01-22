@@ -4,9 +4,11 @@ import React, { useState } from "react";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { useToast } from '@chakra-ui/react';
+import { useNavigate } from "react-router";
 
 export default function Updateproduct() {
   const toast = useToast()
+  const navigate = useNavigate()
   const [category, setCategory] = useState("");
   const [imageSrc, setimageSrc] = useState("");
   const [discountedPrice, setdiscountedPrice] = useState("");
@@ -37,17 +39,19 @@ export default function Updateproduct() {
       },
     })
       .then((response) => response.json())
-      .then((response) => {
-        toast({
-          title: 'Updated successfully',
-          status: 'success',
-          duration: 2000,
-          isClosable: true,
-        })
+      .then((res) => {
+        console.log(res)
+        // toast({
+        //   title: 'Updated successfully',
+        //   status: 'success',
+        //   duration: 2000,
+        //   isClosable: true,
+        // })
+        navigate("/admin")
       })
       .catch((err) => console.log(err));
 
-    alert("updated successfully");
+    // alert("updated successfully");
   };
 
   return (

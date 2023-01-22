@@ -1,4 +1,3 @@
-
 import {
   Box,
   Button,
@@ -12,13 +11,13 @@ import {
 import React from "react";
 import { useState } from "react";
 import CartFooter from "./CartFooter";
-import logo from '../../Assests/logo.png';
-import truck from '../../Assests/truck.jpeg'
-import { useToast } from '@chakra-ui/react'
+import logo from "../../Assests/logo.png";
+import truck from "../../Assests/truck.jpeg";
+import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 const Payment = () => {
-  const toast = useToast()
+  const toast = useToast();
   const navigate = useNavigate();
   const [first, setFirst] = useState("");
   const [last, setLast] = useState("");
@@ -29,12 +28,10 @@ const Payment = () => {
   const [state, setState] = useState("");
   const [selected, setSelected] = useState("yes");
 
-
   const handleChange = (event) => {
     console.log(event.target.value);
     setSelected(event.target.value);
   };
-
 
   const handleSubmit = () => {
     console.log({ first, last, address, pin, city, mobile, state });
@@ -48,21 +45,21 @@ const Payment = () => {
       state !== ""
     ) {
       toast({
-        title: 'Paymnet Successfull',
+        title: "Paymnet Successfull",
         description: "Order Will Be Delivered Within 3-5 working days.",
-        position: 'top',
-        status: 'success',
+        position: "top",
+        status: "success",
         duration: 5000,
         isClosable: true,
-      })
-      navigate("/")
+      });
+      navigate("/");
     } else {
       alert("Please Fill Your all Details");
     }
   };
   return (
     <div>
-      <Box bg="black" h="5vh" w='100%'>
+      <Box bg="black" h="5vh" w="100%">
         <Heading color="white" fontSize="xl">
           Delivery / Pickup Information
         </Heading>
@@ -73,15 +70,34 @@ const Payment = () => {
         m="auto"
         mt="3%"
         minHeight="calc(95vh - 70px)"
-        lineHeight="60px" >
-        <Heading fontSize="lg" ml='6%'>Delivery Mode</Heading>
-        <Flex gap="3" ml='6%'>
-          <input type="radio" checked name="drone" /> Deliver at the Shipping Address
+        lineHeight="60px"
+      >
+        <Heading fontSize="lg" ml="6%">
+          Delivery Mode
+        </Heading>
+        <Flex gap="3" ml="6%">
+          <input type="radio" checked name="drone" /> Deliver at the Shipping
+          Address
           <input type="radio" name="drone" /> Pick up from a CaratLane Store
         </Flex>
-        <Heading fontSize="lg" ml='6%'>Shipping Address</Heading>
-        <Box display='grid' m='auto'  gridTemplateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(1, 1fr)', lg: '1fr 0.7fr' }}>
-          <Flex gap="5" display='grid' m={{ sm: 'auto', md: 'none', lg: 'none' }}  w={{ sm: '80%' }} >
+        <Heading fontSize="lg" ml="6%">
+          Shipping Address
+        </Heading>
+        <Box
+          display="grid"
+          m="auto"
+          gridTemplateColumns={{
+            sm: "repeat(1, 1fr)",
+            md: "repeat(1, 1fr)",
+            lg: "1fr 0.7fr",
+          }}
+        >
+          <Flex
+            gap="5"
+            display="grid"
+            m={{ sm: "auto", md: "none", lg: "none" }}
+            w={{ sm: "80%" }}
+          >
             <Box lineHeight="60px">
               <Input
                 type="text"
@@ -89,7 +105,7 @@ const Payment = () => {
                 placeholder="First Name *"
                 required
                 onChange={(e) => setFirst(e.target.value)}
-                m='auto'
+                m="auto"
               />
               <Input
                 type="text"
@@ -112,8 +128,8 @@ const Payment = () => {
               <Select
                 placeholder="Select State"
                 onChange={(e) => setState(e.target.value)}
-                type='text'
-                w={{ sm: '62%', md: '75%', lg: '100%' }}
+                type="text"
+                w={{ sm: "62%", md: "75%", lg: "100%" }}
               >
                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                 <option value="Andaman and Nicobar Islands">
@@ -184,9 +200,13 @@ const Payment = () => {
           </Flex>
 
           <Flex gap="5" m="auto">
-            <Box lineHeight="60px" w="80%" m="auto" >
-              <Image src={logo} alt="logo_image" w={150} m='auto' />
-              <Flex border="1px solid black" gap="3" justifyContent='space-evenly'>
+            <Box lineHeight="60px" w="80%" m="auto">
+              <Image src={logo} alt="logo_image" w={150} m="auto" />
+              <Flex
+                border="1px solid black"
+                gap="3"
+                justifyContent="space-evenly"
+              >
                 <input
                   name="ok"
                   type="radio"
@@ -195,12 +215,13 @@ const Payment = () => {
                   onChange={handleChange}
                 />
                 <Text fontWeight="bold">Cash on Delivery</Text>
-                <Image
-                  w="30%"
-                  src={truck}
-                />
+                <Image w="30%" src={truck} />
               </Flex>
-              <Flex border="1px solid black" gap="3" justifyContent='space-evenly'>
+              <Flex
+                border="1px solid black"
+                gap="3"
+                justifyContent="space-evenly"
+              >
                 <input
                   name="ok"
                   type="radio"
@@ -211,36 +232,44 @@ const Payment = () => {
                 <Text fontWeight="bold">Pay with Paytm</Text>
                 <Image
                   w="30%"
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png" p='15px'
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png"
+                  p="15px"
                 />
               </Flex>
-              <Flex border="1px solid black" justifyContent='space-evenly'>
+              <Flex border="1px solid black" justifyContent="space-evenly">
                 <input
                   name="ok"
                   type="radio"
                   value="yo"
                   checked={selected === "yo"}
                   onChange={handleChange}
-
                 />
                 <Text fontWeight="bold">Pay by RazorPay</Text>
-                <Image src="https://alidropship.com/wp-content/uploads/2017/09/paypal-logo.png" w='30%' p='20px' />
+                <Image
+                  src="https://alidropship.com/wp-content/uploads/2017/09/paypal-logo.png"
+                  w="30%"
+                  p="20px"
+                />
               </Flex>
-              <Flex border="1px solid black" justifyContent='space-evenly'>
+              <Flex border="1px solid black" justifyContent="space-evenly">
                 <input
                   name="ok"
                   type="radio"
                   value="yo"
                   checked={selected === "yo"}
                   onChange={handleChange}
-
                 />
                 <Text fontWeight="bold">Pay by UPI</Text>
-                <Image src="https://www.vectorlogo.zone/logos/upi/upi-ar21.png" w='30%' ml='40px' />
+                <Image
+                  src="https://www.vectorlogo.zone/logos/upi/upi-ar21.png"
+                  w="30%"
+                  ml="40px"
+                />
               </Flex>
 
               <Button
-                bg="#cd59e9" w="100%"
+                bg="#cd59e9"
+                w="100%"
                 colorScheme="purple"
                 onClick={handleSubmit}
               >
@@ -248,33 +277,15 @@ const Payment = () => {
               </Button>
             </Box>
           </Flex>
-
         </Box>
 
         {/* <Button bg="#cd59e9" colorScheme="purple" onClick={handleSubmit}>
             Continue to Payment Method
           </Button> */}
-
       </Box>
       <CartFooter />
     </div>
   );
 };
 
-
 export default Payment;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

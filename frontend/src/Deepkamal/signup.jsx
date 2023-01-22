@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import { useToast } from '@chakra-ui/react';
@@ -57,6 +57,10 @@ const Signup = () => {
     })
     navigate("/login").catch((err) => console.log(err));
   };
+
+  const transferlogin = ()=>{
+    navigate("/login")
+  }
 
   const handleInputChange_email = (e) => setEmail(e.target.value);
   const handleInputChange_password = (e) => setPassword(e.target.value);
@@ -174,18 +178,14 @@ const Signup = () => {
         >
           REGISTER TO CONTINUE
         </Button>
-        {/* <Text mt={4}>OR</Text> */}
 
         <Text mt={8}>
-          {" "}
           Already have an account?{" "}
-          <a
-            href=""
-            onClick={() => navigate("/login")}
+          <Link to="/login"
             style={{ color: "#985098" }}
           >
-            LOG IN
-          </a>
+            <p onClick={transferlogin}>LOG IN</p>
+          </Link>
         </Text>
       </Tabs>
 

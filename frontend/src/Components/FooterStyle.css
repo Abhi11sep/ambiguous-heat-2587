@@ -1,123 +1,107 @@
 .mainup {
-    background-color: #f7effa;
-    padding: 10px 0px;
-    margin: 20px 0px;
+  background-color: #f7effa;
+  padding: 10px 0px;
+  margin: 20px 0px;
 }
-
 
 .main {
-
-
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    margin: 45px 0px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: 45px 0px;
 }
-
 
 .main li {
-    margin-left: 80px;
-    line-height: 25px;
-    text-align: left;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 400;
-    color: #231535;
-    transition: 0.3s ease-in-out;
-    list-style: none;
-    padding: 0 0px;
-    position: relative;
+  margin-left: 80px;
+  line-height: 25px;
+  text-align: left;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  color: #231535;
+  transition: 0.3s ease-in-out;
+  list-style: none;
+  padding: 0 0px;
+  position: relative;
 }
-
 
 .search {
-    width: 80%;
-    margin: auto;
-    text-align: left;
+  width: 80%;
+  margin: auto;
+  text-align: left;
 }
-
 
 .search h4 {
-    margin-top: 25px;
-    color: rgb(169, 112, 254);
+  margin-top: 25px;
+  color: rgb(169, 112, 254);
 }
-
 
 .search p {
-    line-height: 25px;
-    font-weight: 600;
-    font-size: 12px;
+  line-height: 25px;
+  font-weight: 600;
+  font-size: 12px;
 }
-
 
 .search hr {
-    border-top: 1px solid rgb(245, 237, 237);
+  border-top: 1px solid rgb(245, 237, 237);
 }
 
-
 .footerbottom {
+  width: 80%;
+  margin: 0px auto;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 20px;
+  align-items: left;
+  justify-content: space-between;
+  align-content: left;
+  padding: 0px 0px 40px 0px;
+}
+
+.footerbottom button {
+  background: transparent;
+  font-weight: 600;
+  font-size: 12px;
+  padding: 10px;
+  border: 1px solid blue;
+  border-radius: 5px;
+}
+
+@media screen and (min-width: 650px) and (max-width: 1024px) {
+}
+
+@media screen and (min-width: 320px) and (max-width: 650px) {
+  .footerbottom {
     width: 80%;
     margin: 0px auto;
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     column-gap: 20px;
     row-gap: 20px;
     align-items: left;
     justify-content: space-between;
     align-content: left;
     padding: 0px 0px 40px 0px;
+  }
+
+  #last {
+    display: none;
+  }
+
+  .main {
+    width: 90%;
+    margin: 0px auto;
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: repeat(1, 1fr);
+    column-gap: 20px;
+    row-gap: 20px;
+    align-items: left;
+    justify-content: space-between;
+    align-content: left;
+    padding: 0px 0px 40px 0px;
+  }
 }
-
-
-.footerbottom button {
-    background: transparent;
-    font-weight: 600;
-    font-size: 12px;
-    padding: 10px;
-    border: 1px solid blue;
-    border-radius: 5px;
-}
-
-
-
-
-@media screen and (min-width: 650px) and (max-width: 1024px) {}
-
-
-@media screen and (min-width: 320px) and (max-width: 650px) {
-    .footerbottom {
-        width: 80%;
-        margin: 0px auto;
-        display: grid;
-        grid-template-rows: auto;
-        grid-template-columns: repeat(1, 1fr);
-        column-gap: 20px;
-        row-gap: 20px;
-        align-items: left;
-        justify-content: space-between;
-        align-content: left;
-        padding: 0px 0px 40px 0px;
-    }
-
-
-    #last {
-        display: none;
-    }
-
-
-    .main {
-        width: 90%;
-        margin: 0px auto;
-        display: grid;
-        grid-template-rows: auto;
-        grid-template-columns: repeat(1, 1fr);
-        column-gap: 20px;
-        row-gap: 20px;
-        align-items: left;
-        justify-content: space-between;
-        align-content: left;
-        padding: 0px 0px 40px 0px;
-    }
-}
-

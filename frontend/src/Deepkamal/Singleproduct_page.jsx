@@ -65,8 +65,6 @@ const Singleproduct_page = () => {
           isClosable: true,
         })
         navigate("/cart")
-
-
       })
       .catch((err) => console.log(err));
   };

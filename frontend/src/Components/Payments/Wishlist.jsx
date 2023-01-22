@@ -15,13 +15,12 @@ import { BsBagPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import { useToast } from '@chakra-ui/react'
-
+import { useToast } from "@chakra-ui/react";
 
 const Wishlist = () => {
   const [data, setData] = useState([]);
   const [item, setItem] = useState(true);
-  const toast = useToast()
+  const toast = useToast();
 
   useEffect(() => {
     axios
@@ -45,20 +44,20 @@ const Wishlist = () => {
   //   setItem(!item)
   // }, [item])
 
-  console.log(data);
-
   const handledelete = (id) => {
-    console.log(id);
     axios
-      .delete(`https://rich-plum-lemming-cape.cyclic.app/wishlist/delete/${id}`, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        },
-      })
+      .delete(
+        `https://rich-plum-lemming-cape.cyclic.app/wishlist/delete/${id}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      )
 
       .then((response) => {
-        setItem(!item)
+        setItem(!item);
         console.log(response);
       });
   };
@@ -67,21 +66,18 @@ const Wishlist = () => {
     axios
       .get(`https://rich-plum-lemming-cape.cyclic.app/products/${data}`)
       .then((e) => {
-        // console.log("e", e.data);
         wishlistmove(e.data);
-        // setItem(!item)
         toast({
-          title: 'Product Moved To Cart Successfully',
-          position: 'top',
-          status: 'success',
+          title: "Product Moved To Cart Successfully",
+          position: "top",
+          status: "success",
           duration: 3000,
           isClosable: true,
-        })
+        });
       })
       .catch((e) => console.log(e));
   };
   const wishlistmove = (movedata) => {
-    console.log("move", movedata);
     fetch("https://rich-plum-lemming-cape.cyclic.app/carts/add", {
       method: "POST",
       body: JSON.stringify(movedata),
@@ -92,7 +88,6 @@ const Wishlist = () => {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log("response", response);
         handledelete(response.productId);
       })
       .catch((err) => console.log(err));
@@ -145,7 +140,11 @@ const Wishlist = () => {
           m="auto"
           mt="3%"
           display="grid"
-          gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }}
+          gridTemplateColumns={{
+            sm: "repeat(2, 1fr)",
+            md: "repeat(3, 1fr)",
+            lg: "repeat(4, 1fr)",
+          }}
           gap="5"
         >
           {data.map((ele) => {
