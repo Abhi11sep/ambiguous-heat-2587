@@ -7,12 +7,16 @@ import {
   Spacer,
   Text,
 } from "@chakra-ui/react";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 import { BsBagPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
+
+const arr = [];
 
 const Wishlist = () => {
   const [data, setData] = useState([]);

@@ -1,3 +1,4 @@
+import { Button } from '@chakra-ui/react'
 import React from 'react'
 import img1 from '../Assests/appo1.jpg'
 import img2 from '../Assests/appo2.jpg'
@@ -13,13 +14,15 @@ import SliderCard from '../Components/SliderCard'
 import SliderShow1 from '../Components/SliderShow1'
 import './Home.css'
 
+
 const Home = () => {
   return (
     <>
     <Navbar/>
    
     <div className='wholehome'>
-      <SliderShow1/>
+      <SliderShow1 />
+
 
       <div className="grid-container">
         <img className="item1" src='https://cdn.caratlane.com/media/static/images/V4/2023/Shaya/01-JAN/19/Responsive-banner.jpg' alt='img1'></img>
@@ -100,6 +103,7 @@ const Home = () => {
       <h1 style={{ textAlign: 'left', width: '94%', margin: ' 30px auto' }}>Shop Our Instagram</h1>
       <div className="insta-container">
 
+
         <div className="insta1" ><img src='https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image1.jpg' alt='img1'></img></div>
         <div className="insta2"><img src='https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image2.jpg' alt='img2'></img></div>
         <div className="insta3"><img src='https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/Image4.jpg' alt='img3'></img></div>
@@ -109,11 +113,13 @@ const Home = () => {
         <div className="insta7"><img src='https://cdn.caratlane.com/media/static/images/V4/2022/CL/10-OCT/Others/insta/image7.jpg' alt='img7'></img></div>
       </div>
 
+
       <div className='indsider'>
         <div className="indsider1">
-          <img src={plane} alt='plane1' width={200} />
+          <img src={plane} alt='plane1' width={200} style={{ marginLeft: '150px' }} />
           <h1>Sign up to be a CaratLane Insider</h1>
-          <input type="text" /><input type="submit" />
+          <input className='ipt' style={{ padding: '18px' }} /><Button style={{ backgroundColor: '#a674fb', borderRadius: '0px 5px 5px 0px' }} className='btn'>Submit</Button>
+
 
           <div style={{ display: 'flex', justifyContent: 'space-evenly', width: '90%', margin: 'auto' }}>
             <div> <input type="radio" id="css" name="fav_language" value="CSS" />
@@ -123,7 +129,9 @@ const Home = () => {
             <div><input type="radio" id="css" name="fav_language" value="CSS" />
               <label for="others" style={{ color: 'white', fontSize: '17px' }}>Others</label></div>
 
+
           </div>
+
 
         </div>
       </div>
@@ -139,7 +147,9 @@ const Home = () => {
           <hr style={{ color: 'blue' }}></hr>
           <p>CaratLane works with the vision of offering tastefully designed jewellery at revolutionary prices. This is achieved by eliminating all inefficiencies which result in drastically reduced costs. With CaratLane, users stand to save as much as 30% when compared to prices in the market.
 
+
             Our app is designed to bridge the vast gap between the virtual and the physical world. This has been attained with the help of the Virtual Try-on feature that permits the users to virtually put on 1000s of earrings to see just how they look when placed on the ears.
+
 
             With over 100 thousand downloads, the CaratLane app has emerged to be one of the most liked applications in the jewellery circuit.</p>
         </div>
@@ -148,12 +158,16 @@ const Home = () => {
           <hr style={{ color: 'blue' }}></hr>
           <p>Placing security first, CaratLane ensures that every transaction made on the site is safe and smooth for the customers. To attain this, the company follows stern policies of transparency through the whole customer buying journey.
 
+
             For further convenience, all CaratLane products come backed with certification from international laboratories, and a blanket 15-day-return policy, no questions asked.
+
 
             CaratLane provides the exquisite craftsmanship of beautiful jewellery designs such as rings, earrings, pendants, necklace, chains, bangles, bracelets, mangalsutra, nose pins. Apart from jewellery, CaratLane offers 22k (916) and 24k (995) gold coins with certification and the guarantee of a BIS Hallmarked stamp.</p>
         </div>
 
+
       </div>
+
 
     </div>
     <Footer/>
@@ -161,4 +175,6 @@ const Home = () => {
   )
 }
 
+
 export default Home
+
