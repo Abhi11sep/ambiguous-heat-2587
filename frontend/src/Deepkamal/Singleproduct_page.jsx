@@ -15,54 +15,66 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useToast } from '@chakra-ui/react'
 
 
-import {  useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 
 const Singleproduct_page = () => {
-  const navigate=useNavigate();
-  const {_id} =useParams();
+  const toast = useToast()
+  const navigate = useNavigate();
+  const { _id } = useParams();
   // console.log(_id);
 
-  const [data,setData]=useState("")
+  const [data, setData] = useState("")
 
-  useEffect(()=>{
+  useEffect(() => {
     axios
-    .get(`http://localhost:8080/products/${_id}`)
-    .then((e) => {console.log("data")
-  setData(e.data);
-  })
-    .catch((e) => console.log(e));
-  },[])
+      .get(`https://rich-plum-lemming-cape.cyclic.app/products/${_id}`)
+      .then((e) => {
+        console.log("data")
+        setData(e.data);
+      })
+      .catch((e) => console.log(e));
+  }, [])
 
 
 
-const handlesubmit = () => {
-  
-  console.log(data);
+  const handlesubmit = () => {
 
-  fetch("http://localhost:8080/carts/add", {
-    method: "POST",
-    body: JSON.stringify(data),
-    headers: { "Content-type": "application/json" ,
-    Authorization:localStorage.getItem("token")
-  },
+    console.log(data);
 
-  })
-    .then((response) => response.json())
-    .then((response) =>{ console.log(response)
-     navigate("/cart")
-      
+    fetch("https://rich-plum-lemming-cape.cyclic.app/carts/add", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: localStorage.getItem("token")
+      },
+
     })
-    .catch((err) => console.log(err));
-};
-  
+      .then((response) => response.json())
+      .then((response) => {
+        toast({
+          title: 'Product Added to Cart',
+          position: 'top',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        navigate("/cart")
+
+
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
-    <Navbar/>
-      <div style={{ background: "#f9f9fa",paddingTop:"150px"}} >
+      <Navbar />
+      <div style={{ background: "#f9f9fa", paddingTop: "150px" }} >
         <Grid
           width={"90%"}
           style={{
@@ -140,16 +152,17 @@ const handlesubmit = () => {
               </Box>
             </Grid>
             <GridItem>
-            <a href="" style={{ color: "#DE57E5",  }}>
-              product detailes
-            </a>
+              <a href="" style={{ color: "#DE57E5", }}>
+                product detailes
+              </a>
             </GridItem>
-          
 
 
-            <GridItem style={{ display: "flex" ,
-            //  border:"2px solid red"
-             }} marginTop={"40px"} gap="80px">
+
+            <GridItem style={{
+              display: "flex",
+              //  border:"2px solid red"
+            }} marginTop={"40px"} gap="80px">
               <FormControl>
                 <FormLabel fontSize="sm">Select Size</FormLabel>
                 <Select border={"1px solid #9064fa"} borderRadius={"none"}>
@@ -170,9 +183,10 @@ const handlesubmit = () => {
               </FormControl>
             </GridItem>
 
-            <GridItem style={{ display: "flex", 
-            // border:"2px solid red"
-             }} marginTop={"20px"} gap="80px">
+            <GridItem style={{
+              display: "flex",
+              // border:"2px solid red"
+            }} marginTop={"20px"} gap="80px">
               <FormControl>
                 <FormLabel fontSize="sm">Diamond</FormLabel>
                 <Select border={"1px solid #9064fa"} borderRadius={"none"}>
@@ -180,7 +194,7 @@ const handlesubmit = () => {
                   <option>GH-VVS</option>
                   <option>GH-VVS</option>
                   <option>EF-VVS</option>
-                  
+
                 </Select>
               </FormControl>
               <FormControl>
@@ -193,9 +207,10 @@ const handlesubmit = () => {
                 ></Select>
               </FormControl>
             </GridItem>
-            <GridItem style={{ 
+            <GridItem style={{
               // border:"2px solid red",
-              marginTop:"20px" }}>
+              marginTop: "20px"
+            }}>
               <FormControl >
                 <Text fontSize={"30px"} fontWeight={"bold"} >
                   {data.discountedPrice}
@@ -205,7 +220,7 @@ const handlesubmit = () => {
 
             <GridItem display={"flex"} marginTop={"60px"} gap={"10px"}
             //  border="2px solid red"
-             >
+            >
               <FormControl>
                 <Button
                   style={{ padding: "0px 40px 0px 40px" }}
@@ -222,7 +237,7 @@ const handlesubmit = () => {
           </GridItem>
         </Grid>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

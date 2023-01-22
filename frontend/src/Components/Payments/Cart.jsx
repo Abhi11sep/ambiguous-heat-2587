@@ -9,6 +9,7 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { BiArrowBack, BiLockAlt } from "react-icons/bi";
@@ -19,15 +20,16 @@ import CartFooter from "./CartFooter";
 import CartNavbar from "./CartNavbar";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
-
-
+import { useToast } from '@chakra-ui/react';
 
 
 const Cart = () => {
+  const toast = useToast()
+  const toast1 = useToast();
   let stotal = 0;
   let saveprice = 0;
-let total = 0;
+  let total = 0;
+  let [item, setItem] = useState(true);
   const [count, setCount] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [data, setData] = useState([]);
@@ -40,7 +42,7 @@ let total = 0;
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/carts", {
+      .get("https://rich-plum-lemming-cape.cyclic.app/carts", {
         headers: {
           "content-type": "application/json",
           Authorization: localStorage.getItem("token"),
@@ -54,14 +56,14 @@ let total = 0;
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [item]);
 
   // console.log(data);
 
   const handledelete = (id) => {
     console.log(id);
     axios
-      .delete(`http://localhost:8080/carts/delete/${id}`, {
+      .delete(`https://rich-plum-lemming-cape.cyclic.app/carts/delete/${id}`, {
         headers: {
           "content-type": "application/json",
           Authorization: localStorage.getItem("token"),
@@ -69,17 +71,40 @@ let total = 0;
       })
 
       .then((response) => {
-        console.log(response);
+        setItem(!item)
+        toast({
+          title: 'Product Removed Successfully',
+          position: 'top',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
       });
   };
+
   const navigate = useNavigate();
   const movepaymentpage = () => {
     navigate("/payment");
   };
 
+  const handledelete1 = (id) => {
+    console.log(id);
+    axios
+      .delete(`https://rich-plum-lemming-cape.cyclic.app/carts/delete/${id}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: localStorage.getItem("token"),
+        },
+      })
+
+      .then((response) => {
+        setItem(!item)
+      });
+  };
+
   const wishlist = (data) => {
     axios
-      .get(`http://localhost:8080/products/${data}`)
+      .get(`https://rich-plum-lemming-cape.cyclic.app/products/${data}`)
       .then((e) => {
         setDatawish(e.data);
 
@@ -90,7 +115,7 @@ let total = 0;
   const wishlistmove = (movedata) => {
     console.log("movedata", localStorage.getItem("token"));
 
-    fetch("http://localhost:8080/wishlist/adddata", {
+    fetch("https://rich-plum-lemming-cape.cyclic.app/wishlist/adddata", {
       method: "POST",
       body: JSON.stringify(movedata),
       headers: {
@@ -100,19 +125,27 @@ let total = 0;
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-        handledelete(response.productId);
+        // console.log(response);
+        handledelete1(response.productId);
+        setItem(!item)
+        toast1({
+          title: 'Product Added in Wishlist Successfully',
+          position: 'top',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
       })
       .catch((err) => console.log(err));
   };
   console.log(datawish);
   data.forEach(ele => {
-stotal=stotal+ele.productId.oPrice
-total = total + ele.productId.dPrice
-saveprice = saveprice + (stotal - total)
+    stotal = stotal + ele.productId.oPrice
+    total = total + ele.productId.dPrice
+    saveprice = saveprice + (stotal - total)
   })
-    // console.log(quantity);
-    
+  // console.log(quantity);
+
 
   return (
     <div>
@@ -125,7 +158,8 @@ saveprice = saveprice + (stotal - total)
         boxShadow="rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"
       >
         <Box p="1%">
-          <BiArrowBack size="25" />
+          <Link to="/"> <BiArrowBack size="25" /></Link>
+
         </Box>
         <Spacer />
         <Box display="flex" gap="10" p="1%">
@@ -139,6 +173,9 @@ saveprice = saveprice + (stotal - total)
           </Flex>
         </Box>
         <Spacer />
+        <ul>
+          <li style={{ paddingTop: '10px', marginRight: '20px' }}><Link to='/wishlist'><FavoriteIcon /></Link></li>
+        </ul>
       </Flex>
 
       {data.length == 0 ? (
@@ -150,15 +187,16 @@ saveprice = saveprice + (stotal - total)
             <Heading>Empty Bag!</Heading>
             <Text>Let's do some retail therapy!</Text>
             <Link to="/ring">
-            <Button bg="#cd59e9" color="white" colorScheme="purple">
-              Start Shopping
-            </Button>
+              <Button bg="#cd59e9" color="white" colorScheme="purple">
+                Start Shopping
+              </Button>
             </Link>
           </Box>
         </Box>
       ) : (
-        <Flex w="90%" m="auto" mt="3%">
-          <Box w="60%">
+        <Box w="90%" m="auto" mt="3%" display='grid'
+          gridTemplateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(1, 1fr)', lg: 'repeat(2, 1fr)' }}>
+          <Box >
             <Flex boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px">
               <Box textAlign="left" w="80%" m="auto">
                 <Heading as="h4" size="lg">
@@ -183,82 +221,82 @@ saveprice = saveprice + (stotal - total)
 
             {data.length !== 0
               ? data.map((ele) => {
-                  return (
-                    <Flex border="1px solid black" mb="2%">
-                      <Box>
-                        <Image src={ele.productId.imageSrc} />
+                return (
+                  <Flex border="1px solid black" mb="2%">
+                    <Box>
+                      <Image src={ele.productId.imageSrc} />
+                    </Box>
+                    <Box w="80%">
+                      <Box textAlign="left" w="55%">
+                        <Text>{ele.productId.brand}</Text>
+                        <Text>JR07311-1YP6P0</Text>
+                        <Flex gap="3">
+                          <Text m="auto">Size: </Text>
+                          <Stack m="auto">
+                            <Select fontSize="sm">
+                              {size.map((ok) => (
+                                <option value="5">{ok}</option>
+                              ))}
+                            </Select>
+                          </Stack>
+                          <Text m="auto">Quantity: </Text>
+                          <Stack m="auto">
+                            <Select fontSize="sm" onChange={(e) => setQuantity(e.target.value)}>
+                              {qty.map((ok) => (
+                                <option value={ok}>{ok}</option>
+                              ))}
+                            </Select>
+                          </Stack>
+                        </Flex>
                       </Box>
-                      <Box w="80%">
-                        <Box textAlign="left" w="55%">
-                          <Text>{ele.productId.brand}</Text>
-                          <Text>JR07311-1YP6P0</Text>
+                      <Box display="flex" m="auto" w="100%">
+                        <Box
+                          textAlign="left"
+                          w="70%"
+                          m="auto"
+                          lineHeight="30px"
+                        >
+                          <Text>Delivery by - 23rd to 24th Jan</Text>
                           <Flex gap="3">
-                            <Text m="auto">Size: </Text>
-                            <Stack m="auto">
-                              <Select fontSize="sm">
-                                {size.map((ok) => (
-                                  <option value="5">{ok}</option>
-                                ))}
-                              </Select>
-                            </Stack>
-                            <Text m="auto">Quantity: </Text>
-                            <Stack m="auto">
-                              <Select fontSize="sm" onChange={(e)=>setQuantity(e.target.value)}>
-                                {qty.map((ok) => (
-                                  <option value={ok}>{ok}</option>
-                                ))}
-                              </Select>
-                            </Stack>
+                            <Text fontWeight="bold">
+                              {ele.productId.discountedPrice}
+                            </Text>
+                            <strike>{ele.productId.originalPrice}</strike>
+                            <Text>
+                              Save ₹
+                              {(
+                                (ele.productId.oPrice - ele.productId.dPrice)
+                              ).toLocaleString()}
+                            </Text>
                           </Flex>
+
                         </Box>
-                        <Box display="flex" m="auto" w="100%">
-                          <Box
-                            textAlign="left"
-                            w="70%"
-                            m="auto"
-                            lineHeight="30px"
+                        <Box>
+                          <Button
+                            w="80%"
+                            border="1px solid black"
+                            m="3% 0% 3% 0%"
+                            onClick={() => handledelete(ele.productId._id)}
                           >
-                            <Text>Delivery by - 23rd to 24th Jan</Text>
-                            <Flex gap="3">
-                              <Text fontWeight="bold">
-                                {ele.productId.discountedPrice}
-                              </Text>
-                              <strike>{ele.productId.originalPrice}</strike>
-                              <Text>
-                                Save ₹
-                                {(
-                                  (ele.productId.oPrice- ele.productId.dPrice)
-                                ).toLocaleString()}
-                              </Text>
-                            </Flex>
-                        
-                          </Box>
-                          <Box>
-                            <Button
-                              w="80%"
-                              border="1px solid black"
-                              m="3% 0% 3% 0%"
-                              onClick={() => handledelete(ele.productId._id)}
-                            >
-                              Remove
-                            </Button>
-                            <Button
-                              w="80%"
-                              border="1px solid black"
-                              onClick={() => wishlist(ele.productId._id)}
-                            >
-                              Move to Wishlist
-                            </Button>
-                          </Box>
+                            Remove
+                          </Button>
+                          <Button
+                            w="80%"
+                            border="1px solid black"
+                            onClick={() => wishlist(ele.productId._id)}
+                          >
+                            Move to Wishlist
+                          </Button>
                         </Box>
                       </Box>
-                    </Flex>
-                  );
-                })
+                    </Box>
+                  </Flex>
+                );
+              })
               : null}
           </Box>
 
-          <Box w="40%" textAlign="left">
+          <Box textAlign="left">
             <Box
               w="70%"
               m="auto"
@@ -328,7 +366,7 @@ saveprice = saveprice + (stotal - total)
               </Button>
             </Box>
           </Box>
-        </Flex>
+        </Box>
       )}
       <CartFooter />
     </div>

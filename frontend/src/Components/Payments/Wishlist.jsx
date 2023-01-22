@@ -15,15 +15,17 @@ import { BsBagPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
+import { useToast } from '@chakra-ui/react'
 
-const arr = [];
 
 const Wishlist = () => {
   const [data, setData] = useState([]);
+  const [item, setItem] = useState(true);
+  const toast = useToast()
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/wishlist", {
+      .get("https://rich-plum-lemming-cape.cyclic.app/wishlist", {
         headers: {
           "content-type": "application/json",
           Authorization: localStorage.getItem("token"),
@@ -37,12 +39,18 @@ const Wishlist = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [item]);
+
+  // useEffect(() => {
+  //   setItem(!item)
+  // }, [item])
+
   console.log(data);
+
   const handledelete = (id) => {
     console.log(id);
     axios
-      .delete(`http://localhost:8080/wishlist/delete/${id}`, {
+      .delete(`https://rich-plum-lemming-cape.cyclic.app/wishlist/delete/${id}`, {
         headers: {
           "content-type": "application/json",
           Authorization: localStorage.getItem("token"),
@@ -50,22 +58,31 @@ const Wishlist = () => {
       })
 
       .then((response) => {
+        setItem(!item)
         console.log(response);
       });
   };
 
   const movetocart = (data) => {
     axios
-      .get(`http://localhost:8080/products/${data}`)
+      .get(`https://rich-plum-lemming-cape.cyclic.app/products/${data}`)
       .then((e) => {
-        console.log("e", e.data);
+        // console.log("e", e.data);
         wishlistmove(e.data);
+        // setItem(!item)
+        toast({
+          title: 'Product Moved To Cart Successfully',
+          position: 'top',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
       })
       .catch((e) => console.log(e));
   };
   const wishlistmove = (movedata) => {
     console.log("move", movedata);
-    fetch("http://localhost:8080/carts/add", {
+    fetch("https://rich-plum-lemming-cape.cyclic.app/carts/add", {
       method: "POST",
       body: JSON.stringify(movedata),
       headers: {
@@ -128,7 +145,7 @@ const Wishlist = () => {
           m="auto"
           mt="3%"
           display="grid"
-          gridTemplateColumns="repeat(4, 1fr)"
+          gridTemplateColumns={{ sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)', lg: 'repeat(4, 1fr)' }}
           gap="5"
         >
           {data.map((ele) => {

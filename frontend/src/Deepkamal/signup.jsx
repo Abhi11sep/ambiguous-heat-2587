@@ -19,8 +19,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
+import { useToast } from '@chakra-ui/react';
 
 const Signup = () => {
+  const toast = useToast()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -39,14 +41,20 @@ const Signup = () => {
       role,
     };
     console.log(payload);
-    fetch("http://localhost:8080/users/register", {
+    fetch("https://rich-plum-lemming-cape.cyclic.app/users/register", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: { "Content-type": "application/json" },
     })
       .then((response) => response.json())
       .then((response) => console.log(response));
-    alert("User successfully Registered");
+    toast({
+      title: 'Signup Successfull',
+      description: "We've created your account for you.",
+      status: 'success',
+      duration: 2000,
+      isClosable: true,
+    })
     navigate("/login").catch((err) => console.log(err));
   };
 
@@ -62,7 +70,7 @@ const Signup = () => {
 
   return (
     <>
-    <Navbar/>
+      <Navbar />
       <Tabs style={{ width: "340px", margin: "auto" }} pt={"150px"}>
         <Container mb={4}>
           <Text>Sign Up with CaratLane</Text>
@@ -88,7 +96,7 @@ const Signup = () => {
             </Button>
           </Box>
         </Container>
-        
+
         {/* mobile number */}
         <FormControl isInvalid={isError_number}>
           <FormLabel> Mobile Number</FormLabel>
@@ -118,7 +126,7 @@ const Signup = () => {
         {/* enter name */}
         <FormControl isInvalid={isError_Name}>
           <FormLabel >Enter Name</FormLabel>
-          <Input   value={name} onChange={handlechange_name} />
+          <Input value={name} onChange={handlechange_name} />
           {!isError_Name ? (
             <FormHelperText></FormHelperText>
           ) : (
@@ -149,13 +157,13 @@ const Signup = () => {
           </Stack>
         </RadioGroup>
 
-        <RadioGroup mt={4}  onChange={setRole} value={role}>
-      <Stack direction='row'>
-        <Radio value='buyer'>Buyer</Radio>
-        <Radio value='seller'>Seller</Radio>
-        
-      </Stack>
-    </RadioGroup>
+        <RadioGroup mt={4} onChange={setRole} value={role}>
+          <Stack direction='row'>
+            <Radio value='buyer'>Buyer</Radio>
+            <Radio value='seller'>Seller</Radio>
+
+          </Stack>
+        </RadioGroup>
 
         <Button
           mt={8}
@@ -181,7 +189,7 @@ const Signup = () => {
         </Text>
       </Tabs>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };

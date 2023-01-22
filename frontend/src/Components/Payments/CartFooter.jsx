@@ -1,10 +1,10 @@
 import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import {
-    SiVisa,
-    SiMastercard,
-    SiPaypal,
-    SiAmericanexpress,
-  } from "react-icons/si";
+  SiVisa,
+  SiMastercard,
+  SiPaypal,
+  SiAmericanexpress,
+} from "react-icons/si";
 
 const CartFooter = () => {
   return (

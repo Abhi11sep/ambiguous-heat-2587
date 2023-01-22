@@ -3,8 +3,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
+import { useToast } from '@chakra-ui/react';
 
 export default function Updateproduct() {
+  const toast = useToast()
   const [category, setCategory] = useState("");
   const [imageSrc, setimageSrc] = useState("");
   const [discountedPrice, setdiscountedPrice] = useState("");
@@ -26,7 +28,7 @@ export default function Updateproduct() {
       oprice,
     };
 
-    fetch(`http://localhost:8080/products/update/${dataid}`, {
+    fetch(`https://rich-plum-lemming-cape.cyclic.app/products/update/${dataid}`, {
       method: "PATCH",
       body: JSON.stringify(payload),
       headers: {
@@ -36,7 +38,12 @@ export default function Updateproduct() {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        toast({
+          title: 'Updated successfully',
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        })
       })
       .catch((err) => console.log(err));
 
