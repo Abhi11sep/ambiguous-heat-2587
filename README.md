@@ -14,8 +14,13 @@ Crystal & Gold is India’s leading jewellery destination for the latest trends 
    Backend : NodeJS, MongoDB, Express.js
    
    DataBase   : MongoDB Atlas
-   ```
- ## Team members and contribution
+   ```![Screenshot (1215)](https://user-images.githubusercontent.com/105913793/213976395-f26aa014-34ae-42c1-a826-d292bb0140e2.png)
+![Screenshot (1216)](https://user-images.githubusercontent.com/105913793/213976405-ebafb80f-5341-4fec-9b87-457ee510e08a.png)
+![Screenshot (1218)](https://user-images.githubusercontent.com/105913793/213976426-8b76c3a4-5c5c-49a1-a84f-75c71591aacc.png)
+![Screenshot (1219)](https://user-images.githubusercontent.com/105913793/213976443-302f0f54-8af8-49ff-b9ac-f22e7f9afa02.png)
+
+ ## Team members and![Uploading Screenshot (1217).png…]()
+ contribution
 
  | Team Member            | Contribution                                                              |
 | ----------------- | ------------------------------------------------------------------ |
