@@ -36,30 +36,4 @@ Crystal & Gold is India’s leading jewellery destination for the latest trends 
 | 5 | Admin Login & Page |
 | 6 | Dummy payment using UPI-Paytm |
 
-  **Sample Page Images**
-  ---
-  
-  **1) Home Page**
-  ---
-  <a href="https://drive.google.com/file/d/1DpdoHL85WYcVQDonS1ANbmMVpB7DTWrh/view?usp=share_link" alt="home_page" border="0"></a>
-  
-  
-  **2) User Login Page**
-   ---
-<img src="https://drive.google.com/file/d/1vtWQ8z-ckm4W15skHdU05OCgR7tnB2a6/view?usp=share_link"></img>
-
-  **3) Products Page**
-  ---
-<img src="https://drive.google.com/file/d/14Hfffq0C1HxWIFZzUJV8fHlzAdm1TSFr/view?usp=share_link"></img>
-
-  **4) Product Display Page**
-  ---
-<img src="https://drive.google.com/file/d/1p9Ic7pUVkIGLwyqNKcKIE7Gp_-4182_y/view?usp=share_link"></img>
-
-  **5) Cart Page**
-  ---
-<img src="https://drive.google.com/file/d/1BhEpRGYF8ttAOQg7nhx1i3pLBdElg_vF/view?usp=share_link"></img>
-
-  **6) Payment Page**
-  ---
-<img src="https://drive.google.com/file/d/1HDn02HN47OZsV-hqi6rlfmoKlcS5Hd1w/view?usp=share_link"></img>
+ 
