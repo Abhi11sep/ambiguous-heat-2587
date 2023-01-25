@@ -39,4 +39,6 @@ Crystal & Gold is India’s leading jewellery destination for the latest trends 
 | 5 | Admin Login & Page |
 | 6 | Dummy payment using UPI-Paytm |
 
+<span>&nbsp;<img align="left" width="300px" alt="picture of coder" src="https://github.com/Abhi11sep/Abhi11sep/blob/main/trip%20advisor.gif"/></span>
+
  
