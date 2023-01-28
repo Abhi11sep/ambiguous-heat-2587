@@ -20,7 +20,7 @@ DataBase   : MongoDB Atlas
 | Abhishek Singh | Home Page with Header And Footer |
 | Deepkamal yadav | single product page, user signup, user login & Admin login frontend  |
 | Omchand kanu | Wishlist Page, Cart Page, Payment Page |
-| Pankaj Singh | ALl Backend data managemnet with MongoDB Atlas |
+| Pankaj Singh | All Backend data managemnet with MongoDB Atlas |
 | Shalini | All Products Page |
 
 ## Features
