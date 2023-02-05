@@ -3,7 +3,7 @@
 
 **Introduction**
 ---
-This is our Sixth Construct Week Project at Masai School's Full Stack Web Development Course. We are currently at the end of Sixth unit where we need to make projects as per mastery based progression environment of Masai School after learnig certain tech-tools and in Sixth unit we have learnt React and Nodejs for Front-end and state management respectively. Crystal & Gold is India’s leading jewellery destination for the latest trends & fashion. where use can select jewellery and wishlist or cart them and buy easily.
+This is our Construct Week Project at Masai School's Full Stack Web Development Course. We are currently at the end of Sixth unit where we need to make projects as per mastery based progression environment of Masai School after learnig certain tech-tools and in Sixth unit we have learnt React and Nodejs for Front-end and state management respectively. Crystal & Gold is India’s leading jewellery destination for the latest trends & fashion. where user can select jewellery and wishlist or add to cart and buy easily.
 ##  Tech-stack used
   
    ```
