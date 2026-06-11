@@ -41,7 +41,7 @@ const Signup = () => {
       role,
     };
     console.log(payload);
-    fetch("https://rich-plum-lemming-cape.cyclic.app/users/register", {
+    fetch("https://ambiguous-heat-2587.onrender.com/users/register", {
       method: "POST",
       body: JSON.stringify(payload),
       headers: { "Content-type": "application/json" },
