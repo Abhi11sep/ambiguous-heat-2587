@@ -24,7 +24,7 @@ const Wishlist = () => {
 
   useEffect(() => {
     axios
-      .get("https://rich-plum-lemming-cape.cyclic.app/wishlist", {
+      .get("https://ambiguous-heat-2587.onrender.com/wishlist", {
         headers: {
           "content-type": "application/json",
           Authorization: localStorage.getItem("token"),
@@ -47,7 +47,7 @@ const Wishlist = () => {
   const handledelete = (id) => {
     axios
       .delete(
-        `https://rich-plum-lemming-cape.cyclic.app/wishlist/delete/${id}`,
+        `https://ambiguous-heat-2587.onrender.com/wishlist/delete/${id}`,
         {
           headers: {
             "content-type": "application/json",
@@ -64,7 +64,7 @@ const Wishlist = () => {
 
   const movetocart = (data) => {
     axios
-      .get(`https://rich-plum-lemming-cape.cyclic.app/products/${data}`)
+      .get(`https://ambiguous-heat-2587.onrender.com/products/${data}`)
       .then((e) => {
         wishlistmove(e.data);
         toast({
@@ -78,7 +78,7 @@ const Wishlist = () => {
       .catch((e) => console.log(e));
   };
   const wishlistmove = (movedata) => {
-    fetch("https://rich-plum-lemming-cape.cyclic.app/carts/add", {
+    fetch("https://ambiguous-heat-2587.onrender.com/carts/add", {
       method: "POST",
       body: JSON.stringify(movedata),
       headers: {
