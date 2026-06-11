@@ -39,7 +39,7 @@ const NewArrival = () => {
   const toast = useToast();
 
   useEffect(() => {
-    axios(`https://rich-plum-lemming-cape.cyclic.app/products?page=${page}&limit=10`)
+    axios(`https://ambiguous-heat-2587.onrender.com/products?page=${page}&limit=10`)
       .then((res) => setData(res.data))
       .catch((err) => alert(err));
   }, [page]);
