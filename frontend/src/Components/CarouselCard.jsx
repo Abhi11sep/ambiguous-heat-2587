@@ -11,13 +11,13 @@ const breakPoints = [
 const CarouselCard = () => {
   const [items, setItems] = useState([
     {
-      pic: "https://cdn.caratlane.com/media/catalog/product/J/S/JS00811-1YP600_1_lar.jpg",
+      pic: "https://cdn.caratlane.com/media/catalog/product/J/S/JS00423-1YP900_1_lar.jpg",
       price: "47,850",
       strikeoff: "53,590",
       title: "Parni Diamond Mangalsutra",
     },
     {
-      pic: "https://cdn.caratlane.com/media/catalog/product/J/R/JR04654-RGP900_1_lar.jpg",
+      pic: "https://cdn.caratlane.com/media/catalog/product/J/R/JR07845-1YS300_1_lar.jpg",
       price: "20,120",
       strikeoff: "22,566",
       title: "Sasha Shimmer Diamond Ring",
@@ -29,7 +29,7 @@ const CarouselCard = () => {
       title: "Rhodeus Drop Gold Earrings",
     },
     {
-      pic: "https://cdn.caratlane.com/media/catalog/product/J/S/JS00812-1YP600_1_lar.jpg",
+      pic: "https://cdn.caratlane.com/media/catalog/product/K/S/KS00521-2Y0000_1_lar.jpg",
       price: "41,963",
       strikeoff: "46,582",
       title: "Maissa Diamond Mangalsutra",
