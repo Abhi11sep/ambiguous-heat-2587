@@ -30,7 +30,7 @@ export default function Updateproduct() {
       oprice,
     };
 
-    fetch(`https://rich-plum-lemming-cape.cyclic.app/products/update/${dataid}`, {
+    fetch(`https://ambiguous-heat-2587.onrender.com/products/update/${dataid}`, {
       method: "PATCH",
       body: JSON.stringify(payload),
       headers: {
