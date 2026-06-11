@@ -32,7 +32,7 @@ const Singleproduct_page = () => {
 
   useEffect(() => {
     axios
-      .get(`https://rich-plum-lemming-cape.cyclic.app/products/${_id}`)
+      .get(`https://ambiguous-heat-2587.onrender.com/products/${_id}`)
       .then((e) => {
         console.log("data")
         setData(e.data);
@@ -46,7 +46,7 @@ const Singleproduct_page = () => {
 
     console.log(data);
 
-    fetch("https://rich-plum-lemming-cape.cyclic.app/carts/add", {
+    fetch("https://ambiguous-heat-2587.onrender.com/carts/add", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
